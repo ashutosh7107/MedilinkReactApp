@@ -1,4 +1,4 @@
-# MedilinkReactApp# MedilinkReactApp
+# MedilinkReactApp
 
 MedilinkReactApp is a full-stack web application featuring a React frontend and an Express backend with a MySQL database. It provides a medical services portal with user authentication, appointment booking, and informational pages about services, blogs, and contact details.
 
