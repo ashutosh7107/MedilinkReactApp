@@ -21,6 +21,7 @@ MedilinkReactApp is a full-stack web application featuring a React frontend and 
 ReactFrontendExpressBackendWithDB/
 ├── client/    # React frontend
 ├── server/    # Express backend
+├── package.json  # Root scripts for running both servers
 ```
 
 ---
@@ -44,42 +45,32 @@ cd ReactFrontendExpressBackendWithDB
 
 ---
 
-### 2. Setup the Backend (Server)
+### 2. Install Dependencies
+
+Install all dependencies for both client and server with a single command from the root folder:
 
 ```bash
-cd server
 npm install
 ```
 
-- Create a `.env` file in the `server` folder with your environment variables (e.g., database credentials, JWT secret).
-- Make sure your MySQL server is running and the required tables are created.
-
-**Start the backend server:**
-
-```bash
-npm run dev
-# or
-npm start
-```
-
-The backend will run on [http://localhost:5000](http://localhost:5000).
+This will install root dependencies (like `concurrently`) and also run `npm install` in both `client` and `server` folders if you set up [npm workspaces](https://docs.npmjs.com/cli/v7/using-npm/workspaces) or run it manually in each folder if not.
 
 ---
 
-### 3. Setup the Frontend (Client)
+### 3. Start the Application (Frontend & Backend Together)
+
+From the root folder, run:
 
 ```bash
-cd ../client
-npm install
+npm run dev
 ```
 
-**Start the frontend development server:**
+This will:
 
-```bash
-npm start
-```
+- Start the Express backend server (on [http://localhost:5000](http://localhost:5000))
+- Start the React frontend development server (on [http://localhost:3000](http://localhost:3000))
 
-The frontend will run on [http://localhost:3000](http://localhost:3000).
+Both servers will run concurrently in your terminal.
 
 ---
 
@@ -92,20 +83,6 @@ The frontend will run on [http://localhost:3000](http://localhost:3000).
 
 - **Service Data:**  
   `GET /api/services`
-
----
-
-## Environment Variables
-
-Create a `.env` file in the `server` directory with the following (example):
-
-```
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=yourpassword
-DB_NAME=medilinkdb
-SECRET_KEY=your_jwt_secret
-```
 
 ---
 
