@@ -1,6 +1,22 @@
-import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTooth,
+  faCapsules,
+  faHeartPulse,
+  faEye,
+  faBrain,
+  faSyringe,
+} from "@fortawesome/free-solid-svg-icons";
+
+const iconMap = {
+  faTooth,
+  faCapsules,
+  faHeartPulse,
+  faEye,
+  faBrain,
+  faSyringe,
+};
 
 const MedicalServices = ({ services }) => {
   return (
@@ -45,7 +61,10 @@ const MedicalServices = ({ services }) => {
                     className="icon-xl fs-1 bg-primary bg-opacity-10 text-primary rounded-3 mb-4"
                     style={{ display: "inline-block", padding: "1rem" }}
                   >
-                    <FontAwesomeIcon icon={service.icon} className="fa-fw" />
+                    <FontAwesomeIcon
+                      icon={iconMap[service.icon]}
+                      className="fa-fw"
+                    />
                   </div>
                   <h5>{service.title}</h5>
                   <p className="mb-4">{service.description}</p>
