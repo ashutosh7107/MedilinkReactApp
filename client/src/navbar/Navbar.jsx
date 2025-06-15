@@ -2,9 +2,17 @@ import { Link } from "react-router-dom";
 import "./Navbar.css";
 import React, { useState } from "react";
 import SignupModal from "../signup/SignUp";
+import LoginModal from "../login/LoginModal";
 
-const Navbar = () => {
+const Navbar = ({
+  isLoggedIn,
+  setIsLoggedIn,
+  loggedInUser,
+  setLoggedInUser,
+}) => {
   const [showSignupModal, setShowSignupModal] = useState(false);
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(false);
 
   return (
     <>
@@ -72,9 +80,18 @@ const Navbar = () => {
 
           <button
             className="btn btn-success ms-3"
-            onClick={() => setShowSignupModal(true)}
+            onClick={() => {
+              if (isLoggedIn) {
+                setIsLoggedIn(false); // Logout
+                setLoggedInUser(null); // Clear logged-in user
+              } else if (isRegistered) {
+                setShowLoginModal(true); // Show Login modal
+              } else {
+                setShowSignupModal(true); // Show Signup modal
+              }
+            }}
           >
-            Sign Up
+            {isLoggedIn ? "Logout" : isRegistered ? "Login" : "Sign Up"}
           </button>
 
           <button
@@ -93,7 +110,24 @@ const Navbar = () => {
 
       {/* Sign Up Modal */}
       {showSignupModal && (
-        <SignupModal onClose={() => setShowSignupModal(false)} />
+        <SignupModal
+          onClose={() => setShowSignupModal(false)}
+          setIsRegistered={setIsRegistered}
+          setShowLoginModal={() => {
+            setShowSignupModal(false); // Close SignUp
+            setShowLoginModal(true); // Open Login
+          }}
+        />
+      )}
+      {showLoginModal && (
+        <LoginModal
+          onClose={() => setShowLoginModal(false)}
+          onLoginSuccess={(name) => {
+            setIsLoggedIn(true);
+            setLoggedInUser(name);
+            setShowLoginModal(false);
+          }}
+        />
       )}
     </>
   );

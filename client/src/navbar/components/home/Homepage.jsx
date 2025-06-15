@@ -20,12 +20,6 @@ import ThirdBannerImageSection from "./sections/ThirdBannerImageSection";
 const Homepage = () => {
   return (
     <div>
-      {/* Blue top bar */}
-      <Topbar />
-
-      {/* Top Navbar */}
-      <Navbar />
-
       {/* Hero Section */}
       <HeroSection />
 

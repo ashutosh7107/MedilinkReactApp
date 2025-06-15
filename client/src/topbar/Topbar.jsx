@@ -1,6 +1,6 @@
 import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 
-const Topbar = () => {
+const Topbar = ({ loggedInUser }) => {
   return (
     <div
       className="d-flex justify-content-between align-items-center px-4"
@@ -11,7 +11,16 @@ const Topbar = () => {
         fontSize: "14px",
       }}
     >
-      <div>Welcome to Medilink.</div>
+      <div>
+        Welcome to Medilink
+        {loggedInUser ? (
+          <>
+            , <b>{loggedInUser.toUpperCase()}</b>
+          </>
+        ) : (
+          ", User"
+        )}
+      </div>
       <div className="d-flex gap-4 align-items-center">
         <div className="d-flex align-items-center gap-2">
           <FaPhoneAlt />

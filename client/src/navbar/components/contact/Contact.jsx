@@ -1,5 +1,3 @@
-import Topbar from "../../../topbar/Topbar";
-import Navbar from "../../Navbar";
 import Footer from "../../../footer/Footer";
 import MedicalServices from "../home/sections/MedicalServices";
 import SecondBannerSection from "../home/sections/SecondBannerSection";
@@ -12,12 +10,6 @@ import ContactForm from "./ContactForm";
 const Contact = () => {
   return (
     <div>
-      {/* Blue top bar */}
-      <Topbar />
-
-      {/* Top Navbar */}
-      <Navbar />
-
       {/* ServicesBanner Section */}
       <PageBanner title="Contact Us" description="Contact" />
 

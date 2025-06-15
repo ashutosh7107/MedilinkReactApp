@@ -1,5 +1,3 @@
-import Topbar from "../../../topbar/Topbar";
-import Navbar from "../../Navbar";
 import Footer from "../../../footer/Footer";
 import MedicalServices from "../home/sections/MedicalServices";
 import SecondBannerSection from "../home/sections/SecondBannerSection";
@@ -10,12 +8,6 @@ import PageBanner from "../PageBanner";
 const Services = () => {
   return (
     <div>
-      {/* Blue top bar */}
-      <Topbar />
-
-      {/* Top Navbar */}
-      <Navbar />
-
       {/* ServicesBanner Section */}
       <PageBanner title="Our Services" description="Services" />
 

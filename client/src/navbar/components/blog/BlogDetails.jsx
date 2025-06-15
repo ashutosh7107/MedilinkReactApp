@@ -1,5 +1,3 @@
-import Topbar from "../../../topbar/Topbar";
-import Navbar from "../../../navbar/Navbar";
 import Footer from "../../../footer/Footer";
 import MedicalServices from "../home/sections/MedicalServices";
 import SecondBannerSection from "../home/sections/SecondBannerSection";
@@ -10,12 +8,6 @@ import PageBanner from "../../components/PageBanner";
 const BlogPost = () => {
   return (
     <div>
-      {/* Blue top bar */}
-      <Topbar />
-
-      {/* Top Navbar */}
-      <Navbar />
-
       {/* AboutBanner Section */}
       <PageBanner title="Blog Details" description="Blog Details" />
 

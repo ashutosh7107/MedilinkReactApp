@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import "./SignUp.css"; // Optional: for custom styling
 
-const Signup = ({ onClose }) => {
+const Signup = ({ onClose, setIsRegistered, setShowLoginModal }) => {
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -33,7 +33,9 @@ const Signup = ({ onClose }) => {
         }
       );
       setMessage("Registration successful!");
+
       setTimeout(() => {
+        setIsRegistered(true);
         onClose();
       }, 2000);
     } catch (err) {
@@ -86,7 +88,13 @@ const Signup = ({ onClose }) => {
         {message && <p style={{ color: "red" }}>{message}</p>}
         <p>
           Already registered?{" "}
-          <span style={{ color: "blue", cursor: "pointer" }} onClick={onClose}>
+          <span
+            style={{ color: "blue", cursor: "pointer" }}
+            onClick={() => {
+              onClose(); // Close SignUp modal
+              setShowLoginModal(); // Open Login modal
+            }}
+          >
             Login
           </span>
         </p>
