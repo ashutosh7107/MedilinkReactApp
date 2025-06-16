@@ -171,4 +171,4 @@ It is built with React, Express, and MySQL, and demonstrates full-stack developm
 
 ## License
 
-This project is licensed under the ISC License.
+No license has been assigned to this project yet.
