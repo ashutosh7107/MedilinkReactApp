@@ -27,6 +27,23 @@ connection.connect((err) => {
     if (err) throw err;
     console.log("User table ready.");
   });
+
+  const createContactQueriesTable = `
+  CREATE TABLE IF NOT EXISTS contact_queries (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  phone VARCHAR(50),
+  subject VARCHAR(255) NOT NULL,
+  message TEXT NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+  `;
+
+  connection.query(createContactQueriesTable, (err, result) => {
+    if (err) throw err;
+    console.log("Contact queries table ready.");
+  });
 });
 
 module.exports = connection;

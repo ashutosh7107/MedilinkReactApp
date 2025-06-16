@@ -19,9 +19,9 @@ const ContactBoxes = () => {
           <div className="px-4 py-5 text-center rounded-3 border w-100">
             <h6 className="mb-2">Call Us</h6>
             <p className="m-0">
-              (+22) 123 - 4567 - 900
+              (+1) 988 - 4567 - 900
               <br />
-              (+22) 123 - 4567 - 901
+              (+1) 988 - 4567 - 901
             </p>
           </div>
         </div>
