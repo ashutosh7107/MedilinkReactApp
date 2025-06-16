@@ -31,10 +31,11 @@ ReactFrontendExpressBackendWithDB/
 - Node.js (v16+ recommended)
 - npm (comes with Node.js)
 - MySQL (for user authentication and data storage)
+- Docker & Docker Compose (optional, for containerized setup)
 
 ---
 
-## Getting Started
+## Getting Started (Without Docker)
 
 ### 1. Clone the repository
 
@@ -71,6 +72,82 @@ This will:
 - Start the React frontend development server (on [http://localhost:3000](http://localhost:3000))
 
 Both servers will run concurrently in your terminal.
+
+---
+
+## Running with Docker
+
+You can also run the entire application using Docker and Docker Compose.
+
+### 1. Make sure Docker is installed
+
+Install Docker from [https://www.docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop)  
+(Ensure Docker Desktop is running before executing the next steps.)
+
+### 2. Build and start containers
+
+From the **root directory** of the project, run:
+
+```bash
+docker compose up --build
+```
+
+**This command will automatically:**
+
+- Build the React client image
+- Build the Express server image
+- Start both containers
+- Start a MySQL database container (as configured in `docker-compose.yml`)
+- Connect all services together so they work out of the box
+
+Open your browser at [http://localhost:3000](http://localhost:3000) to view the app.
+
+### 3. Stopping the containers
+
+To stop all running containers, press `Ctrl+C` in the terminal where Docker is running, then run:
+
+```bash
+docker compose down
+```
+
+---
+
+## Docker Installation (with Colima on Mac)
+
+If you are on a Mac and prefer not to use Docker Desktop, you can use [Colima](https://github.com/abiosoft/colima) as a lightweight Docker alternative.
+
+### Steps to install Docker and Colima:
+
+1. Install Docker:
+   ```bash
+   brew install docker
+   ```
+2. Install Docker Compose:
+   ```bash
+   brew install docker-compose
+   ```
+3. Install Colima:
+
+   ```bash
+   brew install colima
+   ```
+
+4. Start Colima:
+
+   ```bash
+   colima start
+   ```
+
+5. To stop Colima:
+   ```bash
+   colima stop
+   ```
+
+Once Colima is running, you can use Docker commands as usual, for example:
+
+```bash
+docker ps
+```
 
 ---
 
