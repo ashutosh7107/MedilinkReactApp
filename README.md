@@ -155,8 +155,7 @@ docker ps
 
 - **User Authentication:**  
   `POST /api/users/register`  
-  `POST /api/users/login`  
-  `POST /api/users/forgot-password`
+  `POST /api/users/login`
 
 - **Service Data:**  
   `GET /api/services`
