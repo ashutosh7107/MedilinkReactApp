@@ -39,6 +39,30 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
+---
+
+## Running with Docker
+
+If you have [Docker](https://www.docker.com/products/docker-desktop/) installed, you can run the entire application (frontend, backend, and database) using Docker Compose.
+
+From the project root directory (not the `client` folder), run:
+
+```bash
+docker compose up --build
+```
+
+- This will build and start all services defined in the `docker-compose.yml` file.
+- The React app will be available at [http://localhost:3000](http://localhost:3000).
+- The backend API will be available at [http://localhost:5000](http://localhost:5000).
+
+To stop the services, press `Ctrl+C` in the terminal and then run:
+
+```bash
+docker compose down
+```
+
+---
+
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
