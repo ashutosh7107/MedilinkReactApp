@@ -19,7 +19,7 @@ const serviceData = [
   },
   {
     icon: "faEye",
-    title: "Eye Care",
+    title: "Vision",
     description:
       "Routine eye exams, vision correction, cataract surgery, and treatment for glaucoma and other eye diseases.",
   },

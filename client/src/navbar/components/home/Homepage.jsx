@@ -6,16 +6,18 @@ import StatsSection from "./sections/StatsSection";
 import SecondBannerSection from "./sections/SecondBannerSection";
 import ThirdBannerImageSection from "./sections/ThirdBannerImageSection";
 import { useServiceData } from "../../../context/ServiceDataContext";
+import { useBookAppointmentData } from "../../../context/BookAppointmentContext"; // Import the BookAppointmentContext
 
 const Homepage = () => {
   const { serviceData, loading } = useServiceData();
+  const { appointmentData } = useBookAppointmentData();
 
   if (loading) return <div>Loading...</div>;
 
   return (
     <div>
       {/* Hero Section */}
-      <HeroSection />
+      <HeroSection appointmentData={appointmentData} />
 
       {/* Stats Section */}
       <StatsSection />

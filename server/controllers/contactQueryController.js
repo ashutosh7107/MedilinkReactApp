@@ -8,7 +8,7 @@ exports.submitQuery = (req, res) => {
       .json({ error: "All mandatory fields are required." });
   }
 
-  // Save to DB (assuming you have a db connection)
+  // Save to DB
   db.query(
     "INSERT INTO contact_queries (name, email, phone, subject, message) VALUES (?, ?, ?, ?, ?)",
     [name, email, phone, subject, message],

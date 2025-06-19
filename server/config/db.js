@@ -44,6 +44,22 @@ connection.connect((err) => {
     if (err) throw err;
     console.log("Contact queries table ready.");
   });
+
+  const createAppointmentDetailsTable = `
+  CREATE TABLE IF NOT EXISTS appointment_details (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  service_name VARCHAR(255) NOT NULL,
+  service_selected VARCHAR(255) NOT NULL,
+  appointment_date DATE,
+  appointment_time VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+  `;
+
+  connection.query(createAppointmentDetailsTable, (err, result) => {
+    if (err) throw err;
+    console.log("Appointment details table ready.");
+  });
 });
 
 module.exports = connection;

@@ -3,6 +3,7 @@ import "./Navbar.css";
 import React, { useState } from "react";
 import SignupModal from "../signup/SignUp";
 import LoginModal from "../login/LoginModal";
+import AppointmentModal from "../navbar/components/appointment/AppointmentDetails";
 
 const Navbar = ({
   isLoggedIn,
@@ -13,6 +14,7 @@ const Navbar = ({
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
+  const [showAppointmentModal, setShowAppointmentModal] = useState(false);
 
   return (
     <>
@@ -74,9 +76,12 @@ const Navbar = ({
             </Link>
           </div>
 
-          <a className="btn btn-success ms-3" href="#">
+          <button
+            className="btn btn-success ms-3"
+            onClick={() => setShowAppointmentModal(true)}
+          >
             Appointment
-          </a>
+          </button>
 
           <button
             className="btn btn-success ms-3"
@@ -128,6 +133,9 @@ const Navbar = ({
             setShowLoginModal(false);
           }}
         />
+      )}
+      {showAppointmentModal && (
+        <AppointmentModal onClose={() => setShowAppointmentModal(false)} />
       )}
     </>
   );

@@ -3,14 +3,12 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 const moment = require("moment");
+const { nanoid } = require("nanoid");
+const { isValidEmail } = require("../utils/validators");
 
-// Secret for JWT (should use process.env.JWT_SECRET in production)
 const SECRET_KEY = process.env.JWT_SECRET;
 
-// Utility function to validate email
-const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-// Get all users (exclude passwords)
+// Get all users (excluding passwords)
 exports.getUsers = (req, res, next) => {
   db.query("SELECT id, name, email FROM user ORDER BY id", (err, results) => {
     if (err) return next(err);
@@ -18,13 +16,13 @@ exports.getUsers = (req, res, next) => {
   });
 };
 
-// Register new user
+// Register a new user
 exports.registerUser = async (req, res, next) => {
   const { name, email, password } = req.body;
   if (!name || !email || !password)
     return res
       .status(400)
-      .json({ error: "Name, email and password are required" });
+      .json({ error: "Name, email, and password are required" });
 
   if (!isValidEmail(email))
     return res.status(400).json({ error: "Invalid email format" });
@@ -38,17 +36,18 @@ exports.registerUser = async (req, res, next) => {
         return res.status(409).json({ error: "Email already exists" });
 
       const hashedPassword = await bcrypt.hash(password, 10);
+      const userUid = nanoid(6);
 
       db.query("SELECT MAX(id) AS maxId FROM user", (err, results) => {
         if (err) return next(err);
         const newId = results[0].maxId ? results[0].maxId + 1 : 1;
 
         db.query(
-          "INSERT INTO user (id, name, email, password) VALUES (?, ?, ?, ?)",
-          [newId, name, email, hashedPassword],
+          "INSERT INTO user (id, name, email, password, user_uid) VALUES (?, ?, ?, ?, ?)",
+          [newId, name, email, hashedPassword, userUid],
           (err) => {
             if (err) return next(err);
-            res.status(201).json({ id: newId, name, email });
+            res.status(201).json({ id: newId, name, email, user_uid: userUid });
           }
         );
       });
@@ -56,7 +55,7 @@ exports.registerUser = async (req, res, next) => {
   );
 };
 
-// Login user
+// Login a user
 exports.loginUser = (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password)
@@ -78,12 +77,17 @@ exports.loginUser = (req, res, next) => {
         expiresIn: "1h",
       });
 
-      res.json({ message: "Login successful", token, name: user.name });
+      res.json({
+        message: "Login successful",
+        token,
+        name: user.name,
+        user_uid: user.user_uid,
+      });
     }
   );
 };
 
-// Forgot Password - Generate reset token
+// Forgot Password
 exports.forgotPassword = (req, res, next) => {
   const { email } = req.body;
   if (!email) return res.status(400).json({ error: "Email is required" });
@@ -101,18 +105,13 @@ exports.forgotPassword = (req, res, next) => {
       [token, expires, email],
       (err) => {
         if (err) return next(err);
-
-        // You can integrate nodemailer here to email the token
-        res.json({
-          message: "Reset token generated",
-          resetToken: token,
-        });
+        res.json({ message: "Reset token generated", resetToken: token });
       }
     );
   });
 };
 
-// Reset Password with token
+// Reset Password
 exports.resetPassword = async (req, res, next) => {
   const { token, newPassword } = req.body;
   if (!token || !newPassword)
@@ -129,7 +128,6 @@ exports.resetPassword = async (req, res, next) => {
         return res.status(400).json({ error: "Invalid or expired token" });
 
       const hashedPassword = await bcrypt.hash(newPassword, 10);
-
       db.query(
         "UPDATE user SET password = ?, resetToken = NULL, resetTokenExpires = NULL WHERE id = ?",
         [hashedPassword, results[0].id],
@@ -142,7 +140,7 @@ exports.resetPassword = async (req, res, next) => {
   );
 };
 
-// Get user by ID (exclude password)
+// Get user by ID (protected route)
 exports.getUserById = (req, res, next) => {
   const userId = req.params.id;
   db.query(
@@ -152,12 +150,13 @@ exports.getUserById = (req, res, next) => {
       if (err) return next(err);
       if (results.length === 0)
         return res.status(404).json({ error: "User not found" });
+
       res.json(results[0]);
     }
   );
 };
 
-// Update user (name only)
+// Update user name
 exports.updateUser = (req, res, next) => {
   const userId = req.params.id;
   const { name } = req.body;
@@ -169,6 +168,7 @@ exports.updateUser = (req, res, next) => {
       if (err) return next(err);
       if (result.affectedRows === 0)
         return res.status(404).json({ error: "User not found" });
+
       res.json({ id: parseInt(userId), name });
     }
   );
