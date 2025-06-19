@@ -75,7 +75,7 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, setLoggedInUser }) => {
             className="btn btn-success ms-3"
             onClick={() => {
               if (!isLoggedIn) {
-                alert("Please log in to view your appointments."); // ⬅️ show message
+                alert("Please log in to view your appointments.");
               } else {
                 setShowAppointmentModal(true); // only open if logged in
               }
@@ -88,7 +88,6 @@ const Navbar = ({ isLoggedIn, setIsLoggedIn, setLoggedInUser }) => {
             className="btn btn-success ms-3"
             onClick={() => {
               if (isLoggedIn) {
-                console.log("Logging out...");
                 localStorage.removeItem("token");
                 localStorage.removeItem("user_uid");
                 setIsLoggedIn(false); // Logout

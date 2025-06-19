@@ -9,7 +9,6 @@ const errorHandler = require("./middleware/errorHandler");
 const cors = require("cors");
 const helmet = require("helmet");
 
-console.log("Loaded JWT_SECRET:", process.env.JWT_SECRET);
 const app = express();
 const PORT = process.env.PORT || 5000;
 
