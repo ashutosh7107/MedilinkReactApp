@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import apiClient from "../../../apiClient";
 
 const ContactForm = () => {
   const [form, setForm] = useState({
@@ -37,7 +37,7 @@ const ContactForm = () => {
       return;
     }
     try {
-      await axios.post("http://localhost:5000/api/contact/submit", form);
+      await apiClient.post("contact/submit", form);
       setShowPopup(true);
       setForm({ name: "", email: "", phone: "", subject: "", message: "" });
       setTimeout(() => {

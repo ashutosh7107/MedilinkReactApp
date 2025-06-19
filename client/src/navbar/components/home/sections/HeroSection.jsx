@@ -10,6 +10,7 @@ const HeroSection = ({ appointmentData }) => {
   const [appointment_date, setSelectedDate] = useState("");
   const [appointment_time, setSelectedTime] = useState("");
   const [confirmation, setConfirmation] = useState("");
+  const user_uid = localStorage.getItem("user_uid");
 
   const handleServiceChange = (e) => {
     setSelectedService(e.target.value);
@@ -33,6 +34,7 @@ const HeroSection = ({ appointmentData }) => {
         service_selected: service_selected,
         appointment_date: appointment_date,
         appointment_time: appointment_time,
+        user_uid: user_uid,
       });
       setConfirmation("Appointment booked successfully!");
       // reset form and close modal after a delay
@@ -76,7 +78,16 @@ const HeroSection = ({ appointmentData }) => {
             </p>
             <button
               className="btn btn-primary mt-3"
-              onClick={() => setShowModal(true)}
+              onClick={() => {
+                const token = localStorage.getItem("token");
+                console.log("Token:", token);
+                console.log("User UID:", user_uid);
+                if (!token) {
+                  alert("Please log in to book an appointment.");
+                } else {
+                  setShowModal(true);
+                }
+              }}
             >
               Book Appointment
             </button>

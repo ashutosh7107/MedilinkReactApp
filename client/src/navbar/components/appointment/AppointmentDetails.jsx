@@ -7,7 +7,7 @@ const AppointmentModal = ({ onClose }) => {
 
   useEffect(() => {
     apiClient
-      .get("/appointment/getAppointmentDetails/")
+      .get("/appointment/getAppointmentDetails")
       .then((res) => {
         console.log("Appointment API Response:", res.data);
         setAppointments(res.data);

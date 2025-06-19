@@ -1,5 +1,5 @@
+require("dotenv").config();
 const express = require("express");
-const dotenv = require("dotenv");
 const userRoutes = require("./routes/users");
 const serviceDataRoutes = require("./routes/serviceData");
 const contactRoutes = require("./routes/contactQuery");
@@ -9,7 +9,7 @@ const errorHandler = require("./middleware/errorHandler");
 const cors = require("cors");
 const helmet = require("helmet");
 
-dotenv.config();
+console.log("Loaded JWT_SECRET:", process.env.JWT_SECRET);
 const app = express();
 const PORT = process.env.PORT || 5000;
 

@@ -18,6 +18,7 @@ const LoginModal = ({ onClose, onLoginSuccess }) => {
       );
       if (response.status === 200) {
         localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user_uid", response.data.user_uid);
         setMessage("Login successful!");
         setTimeout(() => {
           onLoginSuccess(response.data.name);

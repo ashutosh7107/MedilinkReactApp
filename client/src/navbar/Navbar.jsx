@@ -5,12 +5,7 @@ import SignupModal from "../signup/SignUp";
 import LoginModal from "../login/LoginModal";
 import AppointmentModal from "../navbar/components/appointment/AppointmentDetails";
 
-const Navbar = ({
-  isLoggedIn,
-  setIsLoggedIn,
-  loggedInUser,
-  setLoggedInUser,
-}) => {
+const Navbar = ({ isLoggedIn, setIsLoggedIn, setLoggedInUser }) => {
   const [showSignupModal, setShowSignupModal] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [isRegistered, setIsRegistered] = useState(false);
@@ -78,7 +73,13 @@ const Navbar = ({
 
           <button
             className="btn btn-success ms-3"
-            onClick={() => setShowAppointmentModal(true)}
+            onClick={() => {
+              if (!isLoggedIn) {
+                alert("Please log in to view your appointments."); // ⬅️ show message
+              } else {
+                setShowAppointmentModal(true); // only open if logged in
+              }
+            }}
           >
             Appointment
           </button>
@@ -87,6 +88,9 @@ const Navbar = ({
             className="btn btn-success ms-3"
             onClick={() => {
               if (isLoggedIn) {
+                console.log("Logging out...");
+                localStorage.removeItem("token");
+                localStorage.removeItem("user_uid");
                 setIsLoggedIn(false); // Logout
                 setLoggedInUser(null); // Clear logged-in user
               } else if (isRegistered) {
@@ -134,7 +138,7 @@ const Navbar = ({
           }}
         />
       )}
-      {showAppointmentModal && (
+      {showAppointmentModal && isLoggedIn && (
         <AppointmentModal onClose={() => setShowAppointmentModal(false)} />
       )}
     </>
