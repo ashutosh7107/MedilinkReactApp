@@ -24,9 +24,10 @@ const SecondBannerSection = () => {
                   Medicate Test
                 </h2>
                 <p className="mb-4">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna
-                  aliqua.n
+                  Experience compassionate care and advanced diagnostics at our
+                  multispeciality hospital. Our expert team is dedicated to your
+                  health and well-being, offering round-the-clock medical
+                  services you can trust.
                 </p>
                 <div className="row gy-4">
                   <div className="col-sm-6">

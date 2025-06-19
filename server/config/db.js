@@ -52,7 +52,8 @@ connection.connect((err) => {
   service_selected VARCHAR(255) NOT NULL,
   appointment_date DATE,
   appointment_time VARCHAR(255) NOT NULL,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  user_uid VARCHAR(255)
 );
   `;
 
