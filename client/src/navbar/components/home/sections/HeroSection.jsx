@@ -103,8 +103,12 @@ const HeroSection = ({ appointmentData }) => {
         <Modal.Body>
           <Form>
             <Form.Group className="mb-3">
-              <Form.Label>Select Service</Form.Label>
-              <Form.Select value={service_name} onChange={handleServiceChange}>
+              <Form.Label htmlFor="select-service">Select Service</Form.Label>
+              <Form.Select
+                id="select-service"
+                value={service_name}
+                onChange={handleServiceChange}
+              >
                 <option value="">-- Select Service --</option>
                 {Object.keys(appointmentData).map((service) => (
                   <option key={service} value={service}>
@@ -116,8 +120,9 @@ const HeroSection = ({ appointmentData }) => {
 
             {service_name && (
               <Form.Group className="mb-3">
-                <Form.Label>Select Doctor</Form.Label>
+                <Form.Label htmlFor="select-doctor">Select Doctor</Form.Label>
                 <Form.Select
+                  id="select-doctor"
                   value={service_selected}
                   onChange={(e) => setSelectedDoctor(e.target.value)}
                 >
@@ -132,8 +137,9 @@ const HeroSection = ({ appointmentData }) => {
             )}
 
             <Form.Group className="mb-3">
-              <Form.Label>Select Date</Form.Label>
+              <Form.Label htmlFor="select-date">Select Date</Form.Label>
               <Form.Control
+                id="select-date"
                 type="date"
                 value={appointment_date}
                 onChange={(e) => setSelectedDate(e.target.value)}
@@ -141,8 +147,9 @@ const HeroSection = ({ appointmentData }) => {
             </Form.Group>
 
             <Form.Group className="mb-3">
-              <Form.Label>Select Time</Form.Label>
+              <Form.Label htmlFor="select-time">Select Time</Form.Label>
               <Form.Control
+                id="select-time"
                 type="time"
                 value={appointment_time}
                 onChange={(e) => setSelectedTime(e.target.value)}
