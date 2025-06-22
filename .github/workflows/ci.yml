@@ -8,7 +8,7 @@ on:
       - "**" # all branches
 
 jobs:
-  test:
+  Test Client And Server with Coverage:
     runs-on: ubuntu-latest
 
     strategy:
