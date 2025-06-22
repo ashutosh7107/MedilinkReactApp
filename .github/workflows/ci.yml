@@ -6,6 +6,9 @@ on:
       - main
       - develop
       - "**" # all branches
+  pull_request:
+    branches:
+      - develop
 
 jobs:
   ClientAndServerTestsWithCoverage:
