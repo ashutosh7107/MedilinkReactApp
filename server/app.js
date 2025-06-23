@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: process.env.CORS_ORIGIN,
+    origin: https://medilinkreactapp.onrender.com,
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
